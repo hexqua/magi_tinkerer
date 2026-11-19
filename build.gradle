@@ -1,3 +1,5 @@
+import net.neoforged.moddevgradle.dsl.ModModel
+
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -15,10 +17,14 @@ group = mod_group_id
 sourceSets.main.resources {
     srcDir('src/generated/resources')
 
-    exclude("src/generated/**/.cache")
+    exclude('**/.cache/**')
 }
 
 repositories {
+    maven {
+        url = uri('https://api.modrinth.com/maven')
+        content { includeGroup 'maven.modrinth' }
+    }
 }
 
 base {
@@ -26,6 +32,19 @@ base {
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+String gameTestNamespace = project.property('mod_id').toString()
+SourceSet mainModSourceSet = sourceSets.named('main').get()
+def standardGameTestDirectory = layout.projectDirectory.dir('run/gametest')
+def betterCombatGameTestDirectory = layout.projectDirectory.dir('run/gametest_better_combat')
+
+sourceSets {
+    betterCombat {
+        java.setSrcDirs([])
+        resources.setSrcDirs([])
+        runtimeClasspath += mainModSourceSet.output
+    }
+}
 
 neoForge {
     version = project.neo_version
@@ -38,23 +57,41 @@ neoForge {
     runs {
         client {
             client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
+        }
+
+        clientBetterCombat {
+            client()
+            sourceSet = sourceSets.betterCombat
+            gameDirectory = project.file('run/better_combat')
+            systemProperty 'magitinkerer.expectBetterCombat', 'true'
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
         }
 
         server {
             server()
             programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
         }
 
         gameTestServer {
-            type = "gameTestServer"
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            type = 'gameTestServer'
+            gameDirectory = standardGameTestDirectory.asFile
+            systemProperty 'magitinkerer.expectBetterCombat', 'false'
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
+        }
+
+        gameTestServerBetterCombat {
+            type = 'gameTestServer'
+            sourceSet = sourceSets.betterCombat
+            gameDirectory = betterCombatGameTestDirectory.asFile
+            systemProperty 'magitinkerer.expectBetterCombat', 'true'
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
         }
 
         data {
             data()
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', gameTestNamespace, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         configureEach {
@@ -64,30 +101,62 @@ neoForge {
         }
     }
 
-    mods {
-        "${mod_id}" {
-            sourceSet(sourceSets.main)
-        }
+    mods.register(gameTestNamespace) { ModModel mod ->
+        mod.sourceSet(mainModSourceSet)
     }
 }
 
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+    betterCombatRuntimeClasspath.extendsFrom runtimeClasspath
 }
 
 dependencies {
+    implementation "maven.modrinth:magitech_mod:${magitech_modrinth_version_id}"
+
+    // Modrinth Maven では前提 MOD を個別に指定する。
+    localRuntime "maven.modrinth:modonomicon:${modonomicon_modrinth_version_id}"
+    localRuntime "maven.modrinth:lodestonelib:${lodestone_modrinth_version_id}"
+    localRuntime "maven.modrinth:geckolib:${geckolib_modrinth_version_id}"
+    localRuntime "maven.modrinth:curios:${curios_modrinth_version_id}"
+    localRuntime "maven.modrinth:playeranimator:${playeranimator_modrinth_version_id}"
+    localRuntime "maven.modrinth:terrablender:${terrablender_modrinth_version_id}"
+
+    compileOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
+    betterCombatRuntimeOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
+    betterCombatRuntimeOnly "maven.modrinth:cloth-config:${cloth_config_modrinth_version_id}"
+}
+
+apply from: 'scripts/text-encoding.gradle'
+
+def cleanGameTestWorld = tasks.register('cleanGameTestWorld', Delete) {
+    delete standardGameTestDirectory.dir('world')
+}
+def cleanBetterCombatGameTestWorld = tasks.register('cleanBetterCombatGameTestWorld', Delete) {
+    delete betterCombatGameTestDirectory.dir('world')
+}
+tasks.named('runGameTestServer').configure { dependsOn cleanGameTestWorld }
+tasks.named('runGameTestServerBetterCombat').configure { dependsOn cleanBetterCombatGameTestWorld }
+
+tasks.named('jar', Jar).configure {
+    from(['LICENSE', 'ASSETS_LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'TEMPLATE_LICENSE.txt']) {
+        into 'META-INF'
+    }
+    exclude('jp/aquafactory/magitinkerer/gametest/**')
+    exclude('data/magitinkerer/structure/gametest/**')
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
-            loader_version_range   : loader_version_range,
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_license            : mod_license,
-            mod_version            : mod_version,
+            minecraft_version_range : minecraft_version_range,
+            neo_version_range       : neo_version_range,
+            loader_version_range    : loader_version_range,
+            mod_id                  : mod_id,
+            mod_name                : mod_name,
+            mod_license             : mod_license,
+            mod_version             : mod_version,
+            magitech_version        : magitech_version,
+            better_combat_version   : better_combat_version,
     ]
     inputs.properties replaceProperties
     expand replaceProperties
@@ -100,18 +169,19 @@ neoForge.ideSyncTask generateModMetadata
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
-            from components.java
+            SoftwareComponent javaComponent = components.getByName('java')
+            from javaComponent
         }
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            url = layout.projectDirectory.dir('repo').asFile.toURI()
         }
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' 
+    options.encoding = 'UTF-8'
 }
 
 idea {

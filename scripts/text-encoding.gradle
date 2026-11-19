@@ -1,3 +1,8 @@
+import java.nio.ByteBuffer
+import java.nio.charset.CharacterCodingException
+import java.nio.charset.CodingErrorAction
+import java.nio.charset.StandardCharsets
+
 def textEncodingHygieneIncludes = [
         '**/*.cfg',
         '**/*.gradle',
@@ -26,11 +31,6 @@ def textEncodingHygieneExcludes = [
         'run/**',
         'run-data/**',
 ]
-
-def textEncodingMojibakeHeuristicSkips = [
-        // 中国語本文は単純な CJK 断片ヒューリスティックと衝突しやすいため、BOM/UTF-8 検査だけ行う.
-        'src/main/resources/assets/artificesassortie/lang/zh_cn.json',
-] as Set
 
 def textEncodingHygieneRootDir = layout.projectDirectory.asFile
 def textEncodingHygieneRootPath = textEncodingHygieneRootDir.toPath()
@@ -69,23 +69,22 @@ tasks.register('checkTextEncodingHygiene') {
                 failures << "${relativePath}:1 UTF-8 BOM is not allowed"
             }
 
-            def decoder = java.nio.charset.StandardCharsets.UTF_8.newDecoder()
-                    .onMalformedInput(java.nio.charset.CodingErrorAction.REPORT)
-                    .onUnmappableCharacter(java.nio.charset.CodingErrorAction.REPORT)
+            def decoder = StandardCharsets.UTF_8.newDecoder()
+                    .onMalformedInput(CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(CodingErrorAction.REPORT)
             String text
             try {
-                text = decoder.decode(java.nio.ByteBuffer.wrap(bytes)).toString()
-            } catch (java.nio.charset.CharacterCodingException ignored) {
+                text = decoder.decode(ByteBuffer.wrap(bytes)).toString()
+            } catch (CharacterCodingException ignored) {
                 failures << "${relativePath}:1 invalid UTF-8 byte sequence"
                 return
             }
 
             text.readLines().eachWithIndex { line, index ->
-                boolean skipMojibakeHeuristic = textEncodingMojibakeHeuristicSkips.contains(relativePath)
                 boolean hasReplacementCharacter = line.indexOf('\uFFFD') >= 0
-                int fragmentHitCount = suspiciousFragments.count { fragment -> line.contains(fragment) }
-                boolean hasLikelyMojibake = !skipMojibakeHeuristic
-                        && (fragmentHitCount >= 2 || (fragmentHitCount >= 1 && line ==~ halfwidthKatakana))
+                int fragmentHitCount = suspiciousFragments.count { fragment -> line.contains(fragment) }.intValue()
+                boolean hasLikelyMojibake = fragmentHitCount >= 2
+                        || (fragmentHitCount >= 1 && line ==~ halfwidthKatakana)
 
                 if (hasReplacementCharacter || hasLikelyMojibake) {
                     String excerpt = line.trim()
@@ -109,4 +108,3 @@ tasks.register('checkTextEncodingHygiene') {
 tasks.named('check').configure {
     dependsOn tasks.named('checkTextEncodingHygiene')
 }
-
