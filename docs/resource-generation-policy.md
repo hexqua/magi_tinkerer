@@ -1,0 +1,7 @@
+# リソース管理方針
+
+- レシピ、タグ、ルートテーブル、標準形状の blockstate・モデルなど、標準 Provider で表現できる定義は datagen で生成する。Provider は `jp.aquafactory.magitinkerer.datagen` に置き、データ生成イベントへ接続する。
+- テクスチャ、音声、翻訳、構造物 NBT、制作ツールで編集するモデルやアニメーションは手管理する。独自モデルを参照する定型の定義は datagen で生成できる。
+- 手管理の配布リソースは `src/main/resources`、生成リソースは `src/generated/resources` に置く。生成 JSON は Provider を更新して `runData` で再生成し、生成結果を Git 管理する。生成用 `.cache` は管理対象外とする。
+- 改名や生成先の変更時は手管理との重複、参照切れ、古い出力の残存を確認する。生成キャッシュに記録されていないファイルは再生成後にも残ることがある。
+- Magitech の既存素材を実行時に参照する場合は、上流の名前空間と参照先を確認する。複製・翻案して同梱する場合は [素材ライセンス](../ASSETS_LICENSE.md) に従い、[第三者通知](../THIRD_PARTY_NOTICES.md) に出典・権利表示・変更内容を記録する。

@@ -68,16 +68,16 @@ body:
     id: forge-version
     attributes:
       label: NeoForge version
-      placeholder: "Example: NeoForge 21.1.265"
+      placeholder: "Example: 21.1.x"
     validations:
       required: true
 
   - type: input
     id: dependency-version
     attributes:
-      label: Required dependency versions
+      label: Dependency versions
       description: If you are not sure, write "Not sure" and attach the log file below.
-      placeholder: "Example: Magitech x.x.x, Better Combat x.x.x"
+      placeholder: "Example: Magitech x.x.x, Better Combat x.x.x (if installed)"
     validations:
       required: true
 
