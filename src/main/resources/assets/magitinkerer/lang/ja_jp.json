@@ -1,9 +1,15 @@
 {
     "material.magitinkerer.prismarine_crystal":  "プリズマリンクリスタル",
+    "material.magitinkerer.soulstained_steel":  "魂染みの鋼",
+
     "material.magitech.prismarine_crystal":  "プリズマリンクリスタル",
+    "material.magitech.soulstained_steel":  "魂染みの鋼",
 
     "trait.magitinkerer.sea_friends":  "海の隣人",
+    "trait.magitinkerer.soulhunter":  "魂狩り",
+
     "trait.magitinkerer.description.sea_friends":  "潜水中は水中と非接地による採掘速度の低下を受けない",
+    "trait.magitinkerer.description.soulhunter":  "攻撃時、魂を露出させる\nレベル2以上は余剰分がSpirit Plunderとして機能",
 
     "item.magitinkerer.light_blade":  "%1$sの軽量刃",
     "item.magitinkerer.heavy_blade":  "%1$sの重量刃",

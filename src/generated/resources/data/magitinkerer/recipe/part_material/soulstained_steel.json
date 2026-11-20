@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "malum"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "malum:soul_stained_steel_ingot"
+    }
+  ],
+  "type": "magitech:tool_material",
+  "ingredient": {
+    "tag": "magitinkerer:soulstained_steel_ingots"
+  },
+  "result": "magitinkerer:soulstained_steel"
+}

@@ -21,6 +21,9 @@ public final class RuntimeModsGameTests {
                 "Expected Better Combat loaded: " + expectBetterCombat);
         helper.assertTrue(mods.isLoaded("cloth_config") == expectBetterCombat,
                 "Expected Cloth Config API loaded: " + expectBetterCombat);
+        boolean expectMalum = Boolean.getBoolean("magitinkerer.expectMalum");
+        helper.assertTrue(mods.isLoaded(MagiTinkerer.MALUM_MOD_ID) == expectMalum,
+                "Expected Malum loaded: " + expectMalum);
         helper.succeed();
     }
 }

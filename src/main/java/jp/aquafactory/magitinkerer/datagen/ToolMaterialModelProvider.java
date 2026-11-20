@@ -18,7 +18,7 @@ final class ToolMaterialModelProvider implements DataProvider {
 
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput output) {
-        return CompletableFuture.allOf(ToolMaterialModels.prismarineModels().stream()
+        return CompletableFuture.allOf(ToolMaterialModels.models().stream()
                 .map(model -> saveModel(output, model))
                 .toArray(CompletableFuture[]::new));
     }

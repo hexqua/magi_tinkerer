@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "jp.aquafactory.magitinkerer.compat.malum.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ElementalDamageMixin",
+    "MagicPerformanceMixin",
+    "SoulHarvestMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

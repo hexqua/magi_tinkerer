@@ -1,9 +1,15 @@
 {
     "material.magitinkerer.prismarine_crystal": "Prismarine Crystal",
+    "material.magitinkerer.soulstained_steel":  "Soulstained Steel",
+
     "material.magitech.prismarine_crystal": "Prismarine Crystal",
+    "material.magitech.soulstained_steel":  "Soulstained Steel",
 
     "trait.magitinkerer.sea_friends": "Sea Friends",
+    "trait.magitinkerer.soulhunter":  "Soulhunter",
+
     "trait.magitinkerer.description.sea_friends": "While underwater, removes the mining speed penalties from being submerged and off the ground.",
+    "trait.magitinkerer.description.soulhunter":  "Exposes souls on hit.\nEach Soulhunter level beyond I counts as one level of Spirit Plunder.",
 
     "item.magitinkerer.light_blade": "%1$s Light Blade",
     "item.magitinkerer.heavy_blade": "%1$s Heavy Blade",

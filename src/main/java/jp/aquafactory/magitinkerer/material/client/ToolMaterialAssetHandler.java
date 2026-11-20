@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 
 public final class ToolMaterialAssetHandler extends AssetHandler {
     public static void register(IEventBus modBus) {
@@ -27,9 +26,9 @@ public final class ToolMaterialAssetHandler extends AssetHandler {
 
     @Override
     public @NotNull List<SpriteSource> buildSpriteSources() {
-        var textures = ToolMaterialModels.prismarineModels().stream().map(ToolMaterialModels.Model::source).toList();
+        var textures = ToolMaterialModels.models().stream().map(ToolMaterialModels.Model::source).distinct().toList();
         return List.of(new PalettedPermutations(textures, ToolMaterialModels.PALETTE_KEY,
-                Map.of(ToolMaterialModels.PRISMARINE_PERMUTATION, ToolMaterialModels.PRISMARINE_PALETTE)));
+                ToolMaterialModels.palettes()));
     }
 
     // simple_model は JSON の固定スプライトを使う。
