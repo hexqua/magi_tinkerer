@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "jp.aquafactory.magitinkerer.compat.bettercombat.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerAttackMixin",
+    "SynthesisedToolMixin",
+    "ServerAttackMixin"
+  ],
+  "client": [
+    "client.ClientInputMixin",
+    "client.ClientPacketMixin",
+    "client.ClientPredictionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

@@ -9,6 +9,10 @@ displayName="${mod_name}"
 authors="Aquid"
 description='''An add-on that expands Magitech.'''
 
+[[mixins]]
+config="magitinkerer.bettercombat.mixins.json"
+requiredMods=["bettercombat"]
+
 [[dependencies."${mod_id}"]]
     modId="neoforge"
     type="required"

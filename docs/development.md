@@ -32,4 +32,4 @@ GameTest は構成ごとの専用ディレクトリに置き、各タスクが�
 
 build 設定を変えたら IntelliJ IDEA で Gradle プロジェクトを再読み込みします。`neoForgeIdeSync` は IDE 起動用ファイルを更新します。TOML の依存 MOD ID に IDE 警告が出る場合は、生成した TOML、実行構成、MOD のロード結果を照合してください。
 
-Magitech と Better Combat の併用時に `setLastAttackedTicks` の Mixin 競合が出る場合は、双方の実装とロードログを確認します。依存由来の警告と機能上の影響は、その作業の検証結果に記録します。
+Magitech と Better Combat の併用時は `setLastAttackedTicks` の Mixin 競合警告が出ます。両者が同じ `attackStrengthTicker` に代入するため、残る setter を双方で共有できます。旧アドオンでの併用・単独クライアントの目視比較では、通常攻撃・範囲攻撃・採掘中断直後のクールダウンに、この警告に起因する不具合は観測されませんでした（`magitech_with_combat` の `499b3b4`）。setter の実装や適用順が変わった場合、またはクールダウンに不具合が出た場合は、実際に残るメソッドと呼び出し経路を再確認します。
