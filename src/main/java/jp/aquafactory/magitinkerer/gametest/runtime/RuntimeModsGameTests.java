@@ -16,7 +16,7 @@ public final class RuntimeModsGameTests {
         var mods = ModList.get();
         helper.assertTrue(mods.isLoaded("magitech"), "Magitech is missing");
         boolean expectBetterCombat = Boolean.getBoolean("magitinkerer.expectBetterCombat");
-        helper.assertTrue(mods.isLoaded("bettercombat") == expectBetterCombat,
+        helper.assertTrue(mods.isLoaded(MagiTinkerer.BETTER_COMBAT_MOD_ID) == expectBetterCombat,
                 "Expected Better Combat loaded: " + expectBetterCombat);
         helper.assertTrue(mods.isLoaded("cloth_config") == expectBetterCombat,
                 "Expected Cloth Config API loaded: " + expectBetterCombat);

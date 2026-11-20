@@ -123,6 +123,9 @@ dependencies {
     localRuntime "maven.modrinth:terrablender:${terrablender_modrinth_version_id}"
 
     compileOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
+    compileOnly "maven.modrinth:lodestonelib:${lodestone_modrinth_version_id}"
+    // 実行時は Better Combat が同梱する版を使う。
+    compileOnly "maven.modrinth:tiny-config:${tiny_config_modrinth_version_id}"
     betterCombatRuntimeOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
     betterCombatRuntimeOnly "maven.modrinth:cloth-config:${cloth_config_modrinth_version_id}"
 }
