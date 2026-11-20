@@ -25,7 +25,9 @@ public final class ToolMaterialModels {
     }
 
     private static List<ToolMaterial> materials() {
-        return List.of(ToolMaterials.PRISMARINE_CRYSTAL.get(), ToolMaterials.SOULSTAINED_STEEL.get());
+        return List.of(ToolMaterials.PRISMARINE_CRYSTAL.get(), ToolMaterials.SOULSTAINED_STEEL.get(),
+                ToolMaterials.MANEUVERING_COATED_GLASS.get(), ToolMaterials.RESTRAINT_COATED_GLASS.get(),
+                ToolMaterials.DURUSIUM.get());
     }
 
     public static Map<String, ResourceLocation> palettes() {

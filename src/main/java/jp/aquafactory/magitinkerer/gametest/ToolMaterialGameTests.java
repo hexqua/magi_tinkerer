@@ -1,6 +1,7 @@
 package jp.aquafactory.magitinkerer.gametest;
 
 import jp.aquafactory.magitinkerer.MagiTinkerer;
+import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
@@ -8,6 +9,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -18,6 +20,7 @@ import net.stln.magitech.content.item.tool.toolitem.SynthesisedToolGenerator;
 import net.stln.magitech.content.recipe.RecipeInit;
 import net.stln.magitech.content.recipe.input.MultiStackRecipeInput;
 import net.stln.magitech.feature.tool.material.MaterialInit;
+import net.stln.magitech.feature.tool.material.ToolMaterial;
 import net.stln.magitech.feature.tool.tool_type.ToolTypeInit;
 import net.stln.magitech.feature.tool.trait.TraitHelper;
 import net.stln.magitech.helper.ComponentHelper;
@@ -36,14 +39,7 @@ public final class ToolMaterialGameTests {
         var prismarine = ToolMaterials.PRISMARINE_CRYSTAL.get();
         var iron = MaterialInit.IRON.get();
 
-        var cuttingInput = new SingleRecipeInput(new ItemStack(Items.PRISMARINE_CRYSTALS, 2));
-        var cuttingRecipe = recipes.getRecipesFor(RecipeInit.PART_CUTTING_TYPE.get(), cuttingInput, level).stream()
-                .filter(recipe -> recipe.value().getResultItem(registries).is(ItemInit.SPIKE_HEAD.get()))
-                .findFirst();
-        helper.assertTrue(cuttingRecipe.isPresent(), "The workbench did not offer a spike head for prismarine crystals");
-        var spikeHead = cuttingRecipe.orElseThrow().value().assemble(cuttingInput, registries);
-        helper.assertTrue(ComponentHelper.getMaterial(spikeHead).orElse(null) == prismarine,
-                "The cut spike head did not receive the prismarine crystal material");
+        var spikeHead = cutSpikeHead(helper, Items.PRISMARINE_CRYSTALS, prismarine);
 
         var handle = ItemInit.HEAVY_HANDLE.toStack();
         handle.set(ComponentInit.MATERIAL_COMPONENT.get(), new MaterialComponent(iron));
@@ -63,6 +59,31 @@ public final class ToolMaterialGameTests {
     }
 
     @GameTest(template = "gametest/runtime")
+    public static void coatedGlassAndDurusiumCanBeCutIntoParts(GameTestHelper helper) {
+        cutSpikeHead(helper, MaterialContent.MANEUVERING_COATED_GLASS.get(),
+                ToolMaterials.MANEUVERING_COATED_GLASS.get());
+        cutSpikeHead(helper, MaterialContent.RESTRAINT_COATED_GLASS.get(),
+                ToolMaterials.RESTRAINT_COATED_GLASS.get());
+        cutSpikeHead(helper, MaterialContent.DURUSIUM_INGOT.get(), ToolMaterials.DURUSIUM.get());
+        helper.succeed();
+    }
+
+    private static ItemStack cutSpikeHead(GameTestHelper helper, ItemLike source, ToolMaterial material) {
+        var level = helper.getLevel();
+        var registries = level.registryAccess();
+        var cuttingInput = new SingleRecipeInput(new ItemStack(source, 2));
+        var cuttingRecipe = level.getRecipeManager()
+                .getRecipesFor(RecipeInit.PART_CUTTING_TYPE.get(), cuttingInput, level).stream()
+                .filter(recipe -> recipe.value().getResultItem(registries).is(ItemInit.SPIKE_HEAD.get()))
+                .findFirst();
+        helper.assertTrue(cuttingRecipe.isPresent(), "The workbench did not offer a spike head for " + source.asItem());
+        var spikeHead = cuttingRecipe.orElseThrow().value().assemble(cuttingInput, registries);
+        helper.assertTrue(ComponentHelper.getMaterial(spikeHead).orElse(null) == material,
+                "The cut spike head did not receive the expected material: " + material.getId());
+        return spikeHead;
+    }
+
+    @GameTest(template = "gametest/runtime")
     public static void soulstainedSteelRecipeIsOptionalButEquipmentRemainsReadable(GameTestHelper helper) {
         var level = helper.getLevel();
         var steel = ToolMaterials.SOULSTAINED_STEEL.get();
@@ -72,14 +93,7 @@ public final class ToolMaterialGameTests {
                 "The soulstained steel material recipe should follow Malum availability");
         if (malumLoaded) {
             var ingot = BuiltInRegistries.ITEM.get(ToolMaterials.SOULSTAINED_STEEL_INGOT);
-            var cuttingInput = new SingleRecipeInput(new ItemStack(ingot, 2));
-            var recipe = level.getRecipeManager().getRecipesFor(RecipeInit.PART_CUTTING_TYPE.get(), cuttingInput, level)
-                    .stream().filter(entry -> entry.value().getResultItem(level.registryAccess()).is(ItemInit.SPIKE_HEAD.get()))
-                    .findFirst();
-            helper.assertTrue(recipe.isPresent(), "The workbench did not offer a spike head for Soulstained Steel Ingots");
-            var part = recipe.orElseThrow().value().assemble(cuttingInput, level.registryAccess());
-            helper.assertTrue(ComponentHelper.getMaterial(part).orElse(null) == steel,
-                    "The cut spike head did not receive the soulstained steel material");
+            cutSpikeHead(helper, ingot, steel);
         }
 
         var tool = SynthesisedToolGenerator.generateTool(ToolTypeInit.PICKAXE.get(),

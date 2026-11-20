@@ -1,23 +1,29 @@
 package jp.aquafactory.magitinkerer.datagen;
 
 import jp.aquafactory.magitinkerer.MagiTinkerer;
+import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.common.conditions.ItemExistsCondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.stln.magitech.content.recipe.ToolMaterialRecipe;
+import net.stln.magitech.feature.tool.material.ToolMaterial;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public final class DataGenerators {
@@ -29,7 +35,11 @@ public final class DataGenerators {
         var output = generator.getPackOutput();
         generator.addProvider(event.includeServer(), new MaterialRecipes(output, event.getLookupProvider()));
         generator.addProvider(event.includeServer(), new MaterialTags(output, event.getLookupProvider(), event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(),
+                List.of(new LootTableProvider.SubProviderEntry(MaterialBlockLoot::new, LootContextParamSets.BLOCK)),
+                event.getLookupProvider()));
         generator.addProvider(event.includeClient(), new ToolMaterialModelProvider(output));
+        generator.addProvider(event.includeClient(), new MaterialModelProvider(output, event.getExistingFileHelper()));
     }
 
     private static final class MaterialRecipes extends RecipeProvider {
@@ -39,15 +49,22 @@ public final class DataGenerators {
 
         @Override
         protected void buildRecipes(RecipeOutput output) {
-            var material = ToolMaterials.PRISMARINE_CRYSTAL.get();
-            output.accept(material.getId().withPrefix("part_material/"),
-                    new ToolMaterialRecipe("", Ingredient.of(Items.PRISMARINE_CRYSTALS), material), null);
+            materialRecipe(output, Ingredient.of(Items.PRISMARINE_CRYSTALS), ToolMaterials.PRISMARINE_CRYSTAL.get());
+            materialRecipe(output, Ingredient.of(MaterialContent.MANEUVERING_COATED_GLASS.get()),
+                    ToolMaterials.MANEUVERING_COATED_GLASS.get());
+            materialRecipe(output, Ingredient.of(MaterialContent.RESTRAINT_COATED_GLASS.get()),
+                    ToolMaterials.RESTRAINT_COATED_GLASS.get());
+            materialRecipe(output, Ingredient.of(MaterialContent.DURUSIUM_INGOT.get()), ToolMaterials.DURUSIUM.get());
 
-            var steel = ToolMaterials.SOULSTAINED_STEEL.get();
-            output.withConditions(new ModLoadedCondition(MagiTinkerer.MALUM_MOD_ID),
-                            new ItemExistsCondition(ToolMaterials.SOULSTAINED_STEEL_INGOT))
-                    .accept(steel.getId().withPrefix("part_material/"),
-                            new ToolMaterialRecipe("", Ingredient.of(ToolMaterials.SOULSTAINED_STEEL_INGOTS), steel), null);
+            var malumOutput = output.withConditions(new ModLoadedCondition(MagiTinkerer.MALUM_MOD_ID),
+                    new ItemExistsCondition(ToolMaterials.SOULSTAINED_STEEL_INGOT));
+            materialRecipe(malumOutput, Ingredient.of(ToolMaterials.SOULSTAINED_STEEL_INGOTS),
+                    ToolMaterials.SOULSTAINED_STEEL.get());
+        }
+
+        private static void materialRecipe(RecipeOutput output, Ingredient ingredient, ToolMaterial material) {
+            output.accept(material.getId().withPrefix("part_material/"),
+                    new ToolMaterialRecipe("", ingredient, material), null);
         }
     }
 

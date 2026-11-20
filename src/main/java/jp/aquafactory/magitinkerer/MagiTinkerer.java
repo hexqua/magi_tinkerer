@@ -4,6 +4,7 @@ import jp.aquafactory.magitinkerer.compat.bettercombat.client.ClientCombat;
 import jp.aquafactory.magitinkerer.compat.bettercombat.network.CombatNetwork;
 import jp.aquafactory.magitinkerer.compat.malum.MalumSoulhunter;
 import jp.aquafactory.magitinkerer.datagen.DataGenerators;
+import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import jp.aquafactory.magitinkerer.material.client.ToolMaterialAssetHandler;
 import jp.aquafactory.magitinkerer.material.client.ToolMaterialCreativeTabs;
@@ -19,6 +20,7 @@ public final class MagiTinkerer {
     public static final String MALUM_MOD_ID = "malum";
 
     public MagiTinkerer(IEventBus modBus, Dist dist) {
+        MaterialContent.register(modBus);
         ToolMaterials.register(modBus);
         modBus.addListener(DataGenerators::gatherData);
         if (dist == Dist.CLIENT) {

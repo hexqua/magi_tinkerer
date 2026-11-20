@@ -1,15 +1,33 @@
 {
+    "itemGroup.magitinkerer.materials": "Magi Tinkerer",
     "material.magitinkerer.prismarine_crystal":  "プリズマリンクリスタル",
     "material.magitinkerer.soulstained_steel":  "魂染みの鋼",
+    "material.magitinkerer.durusium":  "デュラシウム",
+    "material.magitinkerer.maneuvering_coated_glass":  "蠢動覆いのガラス",
+    "material.magitinkerer.restraint_coated_glass":  "抑圧覆いのガラス",
 
     "material.magitech.prismarine_crystal":  "プリズマリンクリスタル",
     "material.magitech.soulstained_steel":  "魂染みの鋼",
+    "material.magitech.durusium":  "デュラシウム",
+    "material.magitech.maneuvering_coated_glass":  "蠢動覆いのガラス",
+    "material.magitech.restraint_coated_glass":  "抑圧覆いのガラス",
 
     "trait.magitinkerer.sea_friends":  "海の隣人",
     "trait.magitinkerer.soulhunter":  "魂狩り",
+    "trait.magitinkerer.steadfast":  "不抜",
+    "trait.magitinkerer.hollow":  "空洞",
+    "trait.magitinkerer.intensify":  "集約",
 
     "trait.magitinkerer.description.sea_friends":  "潜水中は水中と非接地による採掘速度の低下を受けない",
     "trait.magitinkerer.description.soulhunter":  "攻撃時、魂を露出させる\nレベル2以上は余剰分がSpirit Plunderとして機能",
+    "trait.magitinkerer.description.steadfast":  "高耐久で威力・属性・射程・防御を強化\n特定の機材で修理可能(未実装)",
+    "trait.magitinkerer.description.hollow":  "操作性、連続性、射程、特殊を強化\n空洞と集約の合計レベルに応じて最大耐久値が割合で減少",
+    "trait.magitinkerer.description.intensify":  "威力、属性を強化\n空洞と集約の合計レベルに応じて最大耐久値が割合で減少",
+
+    "block.magitinkerer.maneuvering_coated_glass": "蠢動覆いのガラス",
+    "block.magitinkerer.maneuvering_coated_glass_pane": "蠢動覆いのガラス板",
+    "block.magitinkerer.restraint_coated_glass": "抑圧覆いのガラス",
+    "block.magitinkerer.restraint_coated_glass_pane": "抑圧覆いのガラス板",
 
     "item.magitinkerer.light_blade":  "%1$sの軽量刃",
     "item.magitinkerer.heavy_blade":  "%1$sの重量刃",
@@ -22,5 +40,14 @@
     "item.magitinkerer.reinforced_rod":  "%1$sの強化棒",
     "item.magitinkerer.plate":  "%1$sのプレート",
     "item.magitinkerer.catalyst":  "%1$sのカタリスト",
-    "item.magitinkerer.conductor":  "%1$sのコンダクター"
+    "item.magitinkerer.conductor":  "%1$sのコンダクター",
+
+    "item.magitinkerer.durusium_ingot": "デュラシウムインゴット",
+
+    "tooltip.block.magitinkerer.maneuvering_coated_glass": "純粋さを失った、彼らの成れの果て。",
+    "tooltip.block.magitinkerer.maneuvering_coated_glass_pane": "すぐそこにあるほどの薄い壁は、とてつもなく分厚い。",
+    "tooltip.block.magitinkerer.restraint_coated_glass": "純粋無垢に抑圧された、彼らなりの抵抗。",
+    "tooltip.block.magitinkerer.restraint_coated_glass_pane": "全てを通しそうに見えるが、全てを捕らえている。",
+
+    "tooltip.item.magitinkerer.durusium_ingot": "夢見がちな科学者は求む、永遠に壊れない物質こそを。"
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "magitinkerer:block/maneuvering_coated_glass"
+  }
+}

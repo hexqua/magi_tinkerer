@@ -1,15 +1,33 @@
 {
+    "itemGroup.magitinkerer.materials": "Magi Tinkerer",
     "material.magitinkerer.prismarine_crystal": "Prismarine Crystal",
     "material.magitinkerer.soulstained_steel":  "Soulstained Steel",
+    "material.magitinkerer.durusium":  "Durusium",
+    "material.magitinkerer.maneuvering_coated_glass":  "Maneuvering-coated Glass",
+    "material.magitinkerer.restraint_coated_glass":  "Restraint-coated Glass",
 
     "material.magitech.prismarine_crystal": "Prismarine Crystal",
     "material.magitech.soulstained_steel":  "Soulstained Steel",
+    "material.magitech.durusium":  "Durusium",
+    "material.magitech.maneuvering_coated_glass":  "Maneuvering-coated Glass",
+    "material.magitech.restraint_coated_glass":  "Restraint-coated Glass",
 
     "trait.magitinkerer.sea_friends": "Sea Friends",
     "trait.magitinkerer.soulhunter":  "Soulhunter",
+    "trait.magitinkerer.steadfast":  "Steadfast",
+    "trait.magitinkerer.hollow":  "Hollow",
+    "trait.magitinkerer.intensify":  "Intensify",
 
     "trait.magitinkerer.description.sea_friends": "While underwater, removes the mining speed penalties from being submerged and off the ground.",
     "trait.magitinkerer.description.soulhunter":  "Exposes souls on hit.\nEach Soulhunter level beyond I counts as one level of Spirit Plunder.",
+    "trait.magitinkerer.description.steadfast":  "High durability boosts Attack, Element, Range, and Defense.\nRepairable with dedicated equipment (not yet implemented).",
+    "trait.magitinkerer.description.hollow":  "Boosts Handling, Continuity, Range, and Unique.\nReduces maximum durability based on the combined level of Hollow and Intensify.",
+    "trait.magitinkerer.description.intensify":  "Boosts Attack and Element.\nReduces maximum durability based on the combined level of Hollow and Intensify.",
+
+    "block.magitinkerer.maneuvering_coated_glass": "Maneuvering-coated Glass",
+    "block.magitinkerer.maneuvering_coated_glass_pane": "Maneuvering-coated Glass Pane",
+    "block.magitinkerer.restraint_coated_glass": "Restraint-coated Glass",
+    "block.magitinkerer.restraint_coated_glass_pane": "Restraint-coated Glass Pane",
 
     "item.magitinkerer.light_blade": "%1$s Light Blade",
     "item.magitinkerer.heavy_blade": "%1$s Heavy Blade",
@@ -22,5 +40,14 @@
     "item.magitinkerer.reinforced_rod": "%1$s Reinforced Rod",
     "item.magitinkerer.plate": "%1$s Plate",
     "item.magitinkerer.catalyst": "%1$s Catalyst",
-    "item.magitinkerer.conductor": "%1$s Conductor"
+    "item.magitinkerer.conductor": "%1$s Conductor",
+
+    "item.magitinkerer.durusium_ingot": "Durusium Ingot",
+
+    "tooltip.block.magitinkerer.maneuvering_coated_glass": "What became of them after they lost their purity.",
+    "tooltip.block.magitinkerer.maneuvering_coated_glass_pane": "The wall looks paper-thin from here. It is impossibly thick.",
+    "tooltip.block.magitinkerer.restraint_coated_glass": "Held down by innocence itself, they resist in their own way.",
+    "tooltip.block.magitinkerer.restraint_coated_glass_pane": "It seems to let everything through, yet it holds everything captive.",
+
+    "tooltip.item.magitinkerer.durusium_ingot": "A dreaming scientist seeks a material that will never break."
 }
