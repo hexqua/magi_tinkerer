@@ -35,6 +35,13 @@ requiredMods=["bettercombat"]
     side="BOTH"
 
 [[dependencies."${mod_id}"]]
+    modId="atlas_api"
+    type="required"
+    versionRange="[${atlas_api_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies."${mod_id}"]]
     modId="bettercombat"
     type="optional"
     versionRange="[${better_combat_version},)"

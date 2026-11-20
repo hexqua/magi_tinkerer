@@ -1,0 +1,20 @@
+{
+    "material.magitinkerer.prismarine_crystal":  "プリズマリンクリスタル",
+    "material.magitech.prismarine_crystal":  "プリズマリンクリスタル",
+
+    "trait.magitinkerer.sea_friends":  "海の隣人",
+    "trait.magitinkerer.description.sea_friends":  "潜水中は水中と非接地による採掘速度の低下を受けない",
+
+    "item.magitinkerer.light_blade":  "%1$sの軽量刃",
+    "item.magitinkerer.heavy_blade":  "%1$sの重量刃",
+    "item.magitinkerer.light_handle":  "%1$sの軽量持ち手",
+    "item.magitinkerer.heavy_handle":  "%1$sの重量持ち手",
+    "item.magitinkerer.tool_binding":  "%1$sの留め具",
+    "item.magitinkerer.handguard":  "%1$sの鍔",
+    "item.magitinkerer.strike_head":  "%1$sのストライクヘッド",
+    "item.magitinkerer.spike_head":  "%1$sのスパイクヘッド",
+    "item.magitinkerer.reinforced_rod":  "%1$sの強化棒",
+    "item.magitinkerer.plate":  "%1$sのプレート",
+    "item.magitinkerer.catalyst":  "%1$sのカタリスト",
+    "item.magitinkerer.conductor":  "%1$sのコンダクター"
+}

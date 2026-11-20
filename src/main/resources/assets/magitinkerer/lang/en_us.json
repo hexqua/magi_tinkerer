@@ -1,0 +1,20 @@
+{
+    "material.magitinkerer.prismarine_crystal": "Prismarine Crystal",
+    "material.magitech.prismarine_crystal": "Prismarine Crystal",
+
+    "trait.magitinkerer.sea_friends": "Sea Friends",
+    "trait.magitinkerer.description.sea_friends": "While underwater, removes the mining speed penalties from being submerged and off the ground.",
+
+    "item.magitinkerer.light_blade": "%1$s Light Blade",
+    "item.magitinkerer.heavy_blade": "%1$s Heavy Blade",
+    "item.magitinkerer.light_handle": "%1$s Light Handle",
+    "item.magitinkerer.heavy_handle": "%1$s Heavy Handle",
+    "item.magitinkerer.tool_binding": "%1$s Tool Binding",
+    "item.magitinkerer.handguard": "%1$s Handguard",
+    "item.magitinkerer.strike_head": "%1$s Strike Head",
+    "item.magitinkerer.spike_head": "%1$s Spike Head",
+    "item.magitinkerer.reinforced_rod": "%1$s Reinforced Rod",
+    "item.magitinkerer.plate": "%1$s Plate",
+    "item.magitinkerer.catalyst": "%1$s Catalyst",
+    "item.magitinkerer.conductor": "%1$s Conductor"
+}
