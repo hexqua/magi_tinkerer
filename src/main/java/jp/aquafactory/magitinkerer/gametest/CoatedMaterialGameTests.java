@@ -4,7 +4,9 @@ import jp.aquafactory.magitinkerer.MagiTinkerer;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import net.stln.magitech.content.item.tool.toolitem.SynthesisedToolGenerator;
@@ -47,13 +49,16 @@ public final class CoatedMaterialGameTests {
 
     @GameTest(template = "gametest/runtime")
     public static void steadfastUsesReducedDurabilityAndCapsItsLevel(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
         var durusium = ToolMaterials.DURUSIUM.get();
         var wand = SynthesisedToolGenerator.generateTool(ToolTypeInit.WAND.get(), MaterialInit.DIAMOND.get(),
                 MaterialInit.IRON.get(), durusium, ToolMaterials.MANEUVERING_COATED_GLASS.get());
         var item = (SynthesisedToolItem) wand.getItem();
         var base = SynthesisedToolItem.getUpgradedProperties(wand);
-        item.reloadComponent(null, helper.getLevel(), wand);
-        var applied = item.getAppliedProperties(null, helper.getLevel(), wand);
+        player.setItemInHand(InteractionHand.MAIN_HAND, wand);
+        item.reloadComponent(player, level, wand);
+        var applied = item.getAppliedProperties(player, level, wand);
 
         int expectedDurability = (int) (base.getOrId(ToolPropertyInit.DURABILITY.get()) * 1.5 / 2);
         helper.assertTrue(wand.getMaxDamage() == expectedDurability,
@@ -84,8 +89,9 @@ public final class CoatedMaterialGameTests {
         var belowThreshold = SynthesisedToolGenerator.generateTool(ToolTypeInit.WAND.get(), MaterialInit.DIAMOND.get(),
                 MaterialInit.DIAMOND.get(), durusium, ToolMaterials.MANEUVERING_COATED_GLASS.get());
         var belowBase = SynthesisedToolItem.getUpgradedProperties(belowThreshold);
-        item.reloadComponent(null, helper.getLevel(), belowThreshold);
-        var belowApplied = item.getAppliedProperties(null, helper.getLevel(), belowThreshold);
+        player.setItemInHand(InteractionHand.MAIN_HAND, belowThreshold);
+        item.reloadComponent(player, level, belowThreshold);
+        var belowApplied = item.getAppliedProperties(player, level, belowThreshold);
         assertClose(helper, belowApplied, ToolPropertyInit.POWER.get(),
                 belowBase.getOrId(ToolPropertyInit.POWER.get()),
                 "Steadfast should grant no power boost below the durability threshold");
