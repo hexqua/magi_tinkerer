@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "handler": "magitinkerer:tool_materials",
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "magitech:item/part/sample_conductor_magitinkerer_durusium"
+  }
+}

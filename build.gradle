@@ -37,9 +37,15 @@ String gameTestNamespace = project.property('mod_id').toString()
 SourceSet mainModSourceSet = sourceSets.named('main').get()
 def standardGameTestDirectory = layout.projectDirectory.dir('run/gametest')
 def betterCombatGameTestDirectory = layout.projectDirectory.dir('run/gametest_better_combat')
+def compatGameTestDirectory = layout.projectDirectory.dir('run/gametest_compat')
 
 sourceSets {
     betterCombat {
+        java.setSrcDirs([])
+        resources.setSrcDirs([])
+        runtimeClasspath += mainModSourceSet.output
+    }
+    compat {
         java.setSrcDirs([])
         resources.setSrcDirs([])
         runtimeClasspath += mainModSourceSet.output
@@ -68,6 +74,13 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
         }
 
+        clientCompat {
+            client()
+            sourceSet = sourceSets.compat
+            gameDirectory = project.file('run/compat')
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
+        }
+
         server {
             server()
             programArgument '--nogui'
@@ -86,6 +99,14 @@ neoForge {
             sourceSet = sourceSets.betterCombat
             gameDirectory = betterCombatGameTestDirectory.asFile
             systemProperty 'magitinkerer.expectBetterCombat', 'true'
+            systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
+        }
+
+        gameTestServerCompat {
+            type = 'gameTestServer'
+            sourceSet = sourceSets.compat
+            gameDirectory = compatGameTestDirectory.asFile
+            systemProperty 'magitinkerer.expectMalum', 'true'
             systemProperty 'neoforge.enabledGameTestNamespaces', gameTestNamespace
         }
 
@@ -109,10 +130,12 @@ neoForge {
 configurations {
     runtimeClasspath.extendsFrom localRuntime
     betterCombatRuntimeClasspath.extendsFrom runtimeClasspath
+    compatRuntimeClasspath.extendsFrom runtimeClasspath
 }
 
 dependencies {
     implementation "maven.modrinth:magitech_mod:${magitech_modrinth_version_id}"
+    implementation "maven.modrinth:atlas-api:${atlas_api_modrinth_version_id}"
 
     // Modrinth Maven では前提 MOD を個別に指定する。
     localRuntime "maven.modrinth:modonomicon:${modonomicon_modrinth_version_id}"
@@ -122,12 +145,21 @@ dependencies {
     localRuntime "maven.modrinth:playeranimator:${playeranimator_modrinth_version_id}"
     localRuntime "maven.modrinth:terrablender:${terrablender_modrinth_version_id}"
 
+    // 全開発構成で共通の QoL MOD とその前提 MOD。
+    localRuntime "maven.modrinth:mezzconfig:${mezzconfig_modrinth_version_id}"
+    localRuntime "maven.modrinth:jei:${jei_modrinth_version_id}"
+    localRuntime "maven.modrinth:jade:${jade_modrinth_version_id}"
+    localRuntime "maven.modrinth:moonlight:${moonlight_modrinth_version_id}"
+    localRuntime "maven.modrinth:Adega8YN:${target_dummy_modrinth_version_id}"
+
     compileOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
     compileOnly "maven.modrinth:lodestonelib:${lodestone_modrinth_version_id}"
     // 実行時は Better Combat が同梱する版を使う。
     compileOnly "maven.modrinth:tiny-config:${tiny_config_modrinth_version_id}"
     betterCombatRuntimeOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
     betterCombatRuntimeOnly "maven.modrinth:cloth-config:${cloth_config_modrinth_version_id}"
+    compileOnly "maven.modrinth:malum:${malum_modrinth_version_id}"
+    compatRuntimeOnly "maven.modrinth:malum:${malum_modrinth_version_id}"
 }
 
 apply from: 'scripts/text-encoding.gradle'
@@ -138,8 +170,12 @@ def cleanGameTestWorld = tasks.register('cleanGameTestWorld', Delete) {
 def cleanBetterCombatGameTestWorld = tasks.register('cleanBetterCombatGameTestWorld', Delete) {
     delete betterCombatGameTestDirectory.dir('world')
 }
+def cleanCompatGameTestWorld = tasks.register('cleanCompatGameTestWorld', Delete) {
+    delete compatGameTestDirectory.dir('world')
+}
 tasks.named('runGameTestServer').configure { dependsOn cleanGameTestWorld }
 tasks.named('runGameTestServerBetterCombat').configure { dependsOn cleanBetterCombatGameTestWorld }
+tasks.named('runGameTestServerCompat').configure { dependsOn cleanCompatGameTestWorld }
 
 tasks.named('jar', Jar).configure {
     from(['LICENSE', 'ASSETS_LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'TEMPLATE_LICENSE.txt']) {
@@ -159,7 +195,9 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_license             : mod_license,
             mod_version             : mod_version,
             magitech_version        : magitech_version,
+            atlas_api_version       : atlas_api_version,
             better_combat_version   : better_combat_version,
+            malum_version           : malum_version,
     ]
     inputs.properties replaceProperties
     expand replaceProperties

@@ -1,0 +1,7 @@
+{
+  "type": "magitech:tool_material",
+  "ingredient": {
+    "item": "magitinkerer:maneuvering_coated_glass"
+  },
+  "result": "magitinkerer:maneuvering_coated_glass"
+}

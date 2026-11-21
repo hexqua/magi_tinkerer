@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/handheld",
+  "handler": "magitinkerer:tool_materials",
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "magitech:item/tool/light_sword/sample_tool_binding_magitinkerer_prismarine_crystal"
+  }
+}

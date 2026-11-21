@@ -1,0 +1,7 @@
+{
+  "type": "magitech:tool_material",
+  "ingredient": {
+    "item": "magitinkerer:restraint_coated_glass"
+  },
+  "result": "magitinkerer:restraint_coated_glass"
+}
