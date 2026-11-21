@@ -14,6 +14,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.stln.magitech.content.block.BlockInit;
 import net.stln.magitech.content.item.tooltip_item.TooltipTextBlockItem;
 import net.stln.magitech.content.item.tooltip_item.TooltipTextItem;
 
@@ -55,12 +56,14 @@ public final class MaterialContent {
 
     private static DeferredBlock<TransparentBlock> glass(String name) {
         return withItem(BLOCKS.register(name,
-                () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))));
+                () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
+                        .sound(BlockInit.CRYSTAL_SOUND))));
     }
 
     private static DeferredBlock<IronBarsBlock> pane(String name) {
         return withItem(BLOCKS.register(name,
-                () -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE))));
+                () -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)
+                        .sound(BlockInit.CRYSTAL_SOUND))));
     }
 
     private static <B extends Block> DeferredBlock<B> withItem(DeferredBlock<B> block) {

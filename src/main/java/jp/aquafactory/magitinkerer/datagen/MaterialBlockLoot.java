@@ -17,7 +17,7 @@ final class MaterialBlockLoot extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        getKnownBlocks().forEach(this::dropWhenSilkTouch);
+        getKnownBlocks().forEach(this::dropSelf);
     }
 
     @Override
