@@ -145,6 +145,13 @@ dependencies {
     localRuntime "maven.modrinth:playeranimator:${playeranimator_modrinth_version_id}"
     localRuntime "maven.modrinth:terrablender:${terrablender_modrinth_version_id}"
 
+    // 全開発構成で共通の QoL MOD とその前提 MOD。
+    localRuntime "maven.modrinth:mezzconfig:${mezzconfig_modrinth_version_id}"
+    localRuntime "maven.modrinth:jei:${jei_modrinth_version_id}"
+    localRuntime "maven.modrinth:jade:${jade_modrinth_version_id}"
+    localRuntime "maven.modrinth:moonlight:${moonlight_modrinth_version_id}"
+    localRuntime "maven.modrinth:Adega8YN:${target_dummy_modrinth_version_id}"
+
     compileOnly "maven.modrinth:better-combat:${better_combat_modrinth_version_id}"
     compileOnly "maven.modrinth:lodestonelib:${lodestone_modrinth_version_id}"
     // 実行時は Better Combat が同梱する版を使う。
