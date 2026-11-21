@@ -33,7 +33,7 @@ public final class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         var generator = event.getGenerator();
         var output = generator.getPackOutput();
-        generator.addProvider(event.includeServer(), new MaterialRecipes(output, event.getLookupProvider()));
+        generator.addProvider(event.includeServer(), new MagiTinkererRecipes(output, event.getLookupProvider()));
         generator.addProvider(event.includeServer(), new MaterialTags(output, event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(),
                 List.of(new LootTableProvider.SubProviderEntry(MaterialBlockLoot::new, LootContextParamSets.BLOCK)),
@@ -42,13 +42,19 @@ public final class DataGenerators {
         generator.addProvider(event.includeClient(), new MaterialModelProvider(output, event.getExistingFileHelper()));
     }
 
-    private static final class MaterialRecipes extends RecipeProvider {
-        private MaterialRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    private static final class MagiTinkererRecipes extends RecipeProvider {
+        private MagiTinkererRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
             super(output, registries);
         }
 
         @Override
         protected void buildRecipes(RecipeOutput output) {
+            VanillaRecipes.buildRecipes(output);
+            ZardiusCrucibleRecipes.buildRecipes(output);
+            buildMaterialRecipes(output);
+        }
+
+        private static void buildMaterialRecipes(RecipeOutput output) {
             materialRecipe(output, Ingredient.of(Items.PRISMARINE_CRYSTALS), ToolMaterials.PRISMARINE_CRYSTAL.get());
             materialRecipe(output, Ingredient.of(MaterialContent.MANEUVERING_COATED_GLASS.get()),
                     ToolMaterials.MANEUVERING_COATED_GLASS.get());
