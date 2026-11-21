@@ -53,12 +53,8 @@ public final class ToolMaterials {
                     ToolMaterials::durusiumProperties, STEADFAST));
 
     public static final DeferredToolMaterial<ToolMaterial> PRISMARINE_CRYSTAL =
-            MATERIALS.register("prismarine_crystal", () -> new ToolMaterial(
-                            MaterialInit.SAMPLE.get().order(), // todo:それっぽい値にする.
-                            () -> MaterialInit.SAMPLE.get().properties().get().copy(), // todo:それっぽい値にする.
-                            SEA_FRIENDS
-                    )
-            );
+            MATERIALS.register("prismarine_crystal", () -> new ToolMaterial(MaterialInit.CITRINE.get().order() + 0.1F,
+                    ToolMaterials::prismarineCrystalProperties, SEA_FRIENDS));
 
     // 保存済みの装備を復元できるよう、Malum 不在時も同じ ID を登録する。
     public static final DeferredToolMaterial<ToolMaterial> SOULSTAINED_STEEL =
@@ -83,6 +79,27 @@ public final class ToolMaterials {
                             .set(ToolPropertyInit.MANA_EFFICIENCY.get(), 1.3), SOULHUNTER));
 
     private ToolMaterials() {
+    }
+
+    private static ToolProperties prismarineCrystalProperties() {
+        return new ToolProperties(ToolCategoryInit.ALL)
+                .set(ToolPropertyInit.TIER.get(), 1.0)
+                .set(ToolPropertyInit.MAX_PROGRESSION_COEFFICIENT.get(), 1.0)
+                .set(ToolPropertyInit.DAMAGE.get(), 0.80)
+                .set(ToolPropertyInit.ELEMENTAL_DAMAGE.get(), ElementalAttributeToolProperty.singleElement(Element.FLOW, 0.30))
+                .set(ToolPropertyInit.ATTACK_SPEED.get(), 0.90)
+                .set(ToolPropertyInit.MINING_SPEED.get(), 0.85)
+                .set(ToolPropertyInit.DEFENSE.get(), 0.75)
+                .set(ToolPropertyInit.REACH.get(), 1.10)
+                .set(ToolPropertyInit.SWEEP.get(), 0.95)
+                .set(ToolPropertyInit.DURABILITY.get(), 0.65)
+                .set(ToolPropertyInit.MINING_LEVEL.get(), MiningLevel.STONE)
+                .set(ToolPropertyInit.POWER.get(), 0.90)
+                .set(ToolPropertyInit.ELEMENTAL_POWER.get(), ElementalAttributeToolProperty.singleElement(Element.FLOW, 0.40))
+                .set(ToolPropertyInit.CHARGE_SPEED.get(), 0.90)
+                .set(ToolPropertyInit.COOLDOWN_SPEED.get(), 1.00)
+                .set(ToolPropertyInit.LAUNCH.get(), 1.10)
+                .set(ToolPropertyInit.MANA_EFFICIENCY.get(), 1.10);
     }
 
     private static ToolProperties maneuveringGlassProperties() {
