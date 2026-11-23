@@ -3,6 +3,7 @@ package jp.aquafactory.magitinkerer;
 import jp.aquafactory.magitinkerer.compat.bettercombat.client.ClientCombat;
 import jp.aquafactory.magitinkerer.compat.bettercombat.network.CombatNetwork;
 import jp.aquafactory.magitinkerer.compat.malum.MalumSoulhunter;
+import jp.aquafactory.magitinkerer.compat.malum.network.SpellweavingNetwork;
 import jp.aquafactory.magitinkerer.datagen.DataGenerators;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
@@ -40,6 +41,7 @@ public final class MagiTinkerer {
         }
         if (ModList.get().isLoaded(MALUM_MOD_ID)) {
             MalumSoulhunter.register();
+            SpellweavingNetwork.register(modBus, dist);
         }
     }
 }
