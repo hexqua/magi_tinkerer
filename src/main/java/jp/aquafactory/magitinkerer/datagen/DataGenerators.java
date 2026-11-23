@@ -48,7 +48,7 @@ public final class DataGenerators {
         }
 
         @Override
-        protected void buildRecipes(RecipeOutput output) {
+        protected void buildRecipes(@NotNull RecipeOutput output) {
             VanillaRecipes.buildRecipes(output);
             ZardiusCrucibleRecipes.buildRecipes(output);
             buildMaterialRecipes(output);
