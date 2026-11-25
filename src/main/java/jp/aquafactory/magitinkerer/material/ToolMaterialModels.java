@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public final class ToolMaterialModels {
-    public static final ResourceLocation HANDLER = ResourceLocation.fromNamespaceAndPath(MagiTinkerer.MOD_ID, "tool_materials");
     public static final ResourceLocation PALETTE_KEY = ResourceLocation.fromNamespaceAndPath(MagiTinkerer.MOD_ID, "palettes/tool_base");
 
     private ToolMaterialModels() {

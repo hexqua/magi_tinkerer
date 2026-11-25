@@ -26,8 +26,6 @@ final class ToolMaterialModelProvider implements DataProvider {
     private CompletableFuture<?> saveModel(CachedOutput output, ToolMaterialModels.Model model) {
         JsonObject json = new JsonObject();
         json.addProperty("parent", model.parent());
-        json.addProperty("loader", "atlas_api:simple_model");
-        json.addProperty("handler", ToolMaterialModels.HANDLER.toString());
         JsonObject textures = new JsonObject();
         textures.addProperty("layer0", model.sprite().toString());
         json.add("textures", textures);

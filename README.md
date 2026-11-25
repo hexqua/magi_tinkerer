@@ -15,7 +15,6 @@ Magitech用の小さなアドオンMODです。
 - `mods`配下に`jar`を入れればOKです。
 - 現時点で下記が必要です。
     - [Magitech](https://modrinth.com/mod/magitech_mod) とその前提 MOD
-    - [AtlasAPI](https://modrinth.com/mod/atlas-api)
 - 必要に応じて任意依存のMODを入れると連動する要素もあります。
 
 ## 不具合報告

@@ -8,7 +8,6 @@ import jp.aquafactory.magitinkerer.datagen.DataGenerators;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import jp.aquafactory.magitinkerer.material.client.ConnectedGlassClientRegistration;
-import jp.aquafactory.magitinkerer.material.client.ToolMaterialAssetHandler;
 import jp.aquafactory.magitinkerer.material.client.ToolMaterialCreativeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -27,7 +26,6 @@ public final class MagiTinkerer {
         modBus.addListener(DataGenerators::gatherData);
         if (dist == Dist.CLIENT) {
             modBus.addListener(ConnectedGlassClientRegistration::modifyModels);
-            ToolMaterialAssetHandler.register(modBus);
             if (!ModList.get().isLoaded(MALUM_MOD_ID)) {
                 modBus.addListener(ToolMaterialCreativeTabs::hideSoulstainedSteel);
             }
