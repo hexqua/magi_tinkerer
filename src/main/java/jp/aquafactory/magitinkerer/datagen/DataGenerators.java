@@ -39,6 +39,8 @@ public final class DataGenerators {
                 List.of(new LootTableProvider.SubProviderEntry(MaterialBlockLoot::new, LootContextParamSets.BLOCK)),
                 event.getLookupProvider()));
         generator.addProvider(event.includeClient(), new ToolMaterialModelProvider(output));
+        generator.addProvider(event.includeClient(), new ToolMaterialSpriteSourceProvider(output, event.getLookupProvider(),
+                event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new MaterialModelProvider(output, event.getExistingFileHelper()));
     }
 

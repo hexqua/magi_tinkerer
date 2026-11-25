@@ -135,7 +135,6 @@ configurations {
 
 dependencies {
     implementation "maven.modrinth:magitech_mod:${magitech_modrinth_version_id}"
-    implementation "maven.modrinth:atlas-api:${atlas_api_modrinth_version_id}"
 
     // Modrinth Maven では前提 MOD を個別に指定する。
     localRuntime "maven.modrinth:modonomicon:${modonomicon_modrinth_version_id}"
@@ -195,7 +194,6 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_license             : mod_license,
             mod_version             : mod_version,
             magitech_version        : magitech_version,
-            atlas_api_version       : atlas_api_version,
             better_combat_version   : better_combat_version,
             malum_version           : malum_version,
     ]
