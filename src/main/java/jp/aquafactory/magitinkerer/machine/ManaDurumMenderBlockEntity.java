@@ -1,5 +1,6 @@
 package jp.aquafactory.magitinkerer.machine;
 
+import jp.aquafactory.magitinkerer.magicitem.TravelItem;
 import jp.aquafactory.magitinkerer.machine.client.MenderClientEffects;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import net.minecraft.core.BlockPos;
@@ -57,7 +58,7 @@ public final class ManaDurumMenderBlockEntity extends ManaMachineBlockEntity {
         @Override
         public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack tool = getItem(slot);
-            if (tool.isEmpty() || tool.getDamageValue() != 0 || ComponentHelper.isBroken(tool)) {
+            if (tool.isEmpty() || !isFinished(tool)) {
                 return ItemStack.EMPTY;
             }
             return inventory.extractItem(slot, amount, simulate);
@@ -89,11 +90,38 @@ public final class ManaDurumMenderBlockEntity extends ManaMachineBlockEntity {
 
     @Override
     public void tick(Level level, BlockPos pos, BlockState state) {
-        if (level instanceof ServerLevel serverLevel && !isEmpty() && ++repairTicks == REPAIR_INTERVAL) {
-            repairTicks = 0;
-            repair(serverLevel, pos);
+        if (level instanceof ServerLevel serverLevel && !isEmpty()) {
+            ItemStack stack = getItem(0);
+            if (isMirror(stack)) {
+                charge(stack);
+            } else if (++repairTicks == REPAIR_INTERVAL) {
+                repairTicks = 0;
+                repair(serverLevel, pos);
+            }
         }
         super.tick(level, pos, state);
+    }
+
+    private void charge(ItemStack stack) {
+        long room = ComponentHelper.getMaxMana(stack) - ComponentHelper.getMana(stack);
+        long amount = Math.min(room, Math.min(ComponentHelper.getMaxFlow(stack), getMana()));
+        if (amount > 0) {
+            long transferred = getManaHandler(null).consumeMana(amount);
+            ComponentHelper.updateMana(stack, mana -> mana + transferred);
+            setChanged();
+            sendToolUpdate();
+        }
+    }
+
+    private static boolean isMirror(ItemStack stack) {
+        return stack.getItem() instanceof TravelItem item && item.isMirror();
+    }
+
+    private static boolean isFinished(ItemStack stack) {
+        if (isMirror(stack)) {
+            return ComponentHelper.getMana(stack) >= ComponentHelper.getMaxMana(stack);
+        }
+        return stack.getDamageValue() == 0 && !ComponentHelper.isBroken(stack);
     }
 
     private void repair(ServerLevel level, BlockPos pos) {
@@ -146,8 +174,8 @@ public final class ManaDurumMenderBlockEntity extends ManaMachineBlockEntity {
 
     @Override
     public boolean canPlaceItem(int slot, @NotNull ItemStack stack) {
-        return slot == 0 && stack.getItem() instanceof SynthesisedToolItem && stack.isDamageableItem()
-                && ComponentHelper.getPartMaterials(stack).contains(ToolMaterials.DURUSIUM.get());
+        return slot == 0 && (isMirror(stack) || stack.getItem() instanceof SynthesisedToolItem
+                && stack.isDamageableItem() && ComponentHelper.getPartMaterials(stack).contains(ToolMaterials.DURUSIUM.get()));
     }
 
     @Override
