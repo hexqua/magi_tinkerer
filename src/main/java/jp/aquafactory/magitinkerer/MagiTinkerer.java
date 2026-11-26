@@ -5,6 +5,10 @@ import jp.aquafactory.magitinkerer.compat.bettercombat.network.CombatNetwork;
 import jp.aquafactory.magitinkerer.compat.malum.MalumSoulhunter;
 import jp.aquafactory.magitinkerer.compat.malum.network.SpellweavingNetwork;
 import jp.aquafactory.magitinkerer.datagen.DataGenerators;
+import jp.aquafactory.magitinkerer.machine.MenderContent;
+import jp.aquafactory.magitinkerer.machine.client.ManaDurumMenderRenderer;
+import jp.aquafactory.magitinkerer.magicitem.TravelItemContent;
+import jp.aquafactory.magitinkerer.magicitem.client.TravelItemClient;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import jp.aquafactory.magitinkerer.material.client.ConnectedGlassClientRegistration;
@@ -12,6 +16,7 @@ import jp.aquafactory.magitinkerer.material.client.ToolMaterialCreativeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 
 @Mod(MagiTinkerer.MOD_ID)
@@ -20,11 +25,15 @@ public final class MagiTinkerer {
     public static final String BETTER_COMBAT_MOD_ID = "bettercombat";
     public static final String MALUM_MOD_ID = "malum";
 
-    public MagiTinkerer(IEventBus modBus, Dist dist) {
+    public MagiTinkerer(IEventBus modBus, Dist dist, ModContainer container) {
         MaterialContent.register(modBus);
         ToolMaterials.register(modBus);
+        MenderContent.register(modBus);
+        TravelItemContent.register(modBus, container);
         modBus.addListener(DataGenerators::gatherData);
         if (dist == Dist.CLIENT) {
+            TravelItemClient.register(modBus);
+            modBus.addListener(ManaDurumMenderRenderer::register);
             modBus.addListener(ConnectedGlassClientRegistration::modifyModels);
             if (!ModList.get().isLoaded(MALUM_MOD_ID)) {
                 modBus.addListener(ToolMaterialCreativeTabs::hideSoulstainedSteel);

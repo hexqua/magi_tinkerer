@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "magitech:alchecrysite"
+    },
+    "D": {
+      "item": "magitinkerer:durusium_ingot"
+    },
+    "F": {
+      "item": "magitech:fluxium_enclosure"
+    },
+    "G": {
+      "item": "magitech:mana_insulating_glass"
+    },
+    "I": {
+      "item": "magitech:fluxium_nugget"
+    },
+    "N": {
+      "item": "magitech:enhanced_mana_node"
+    }
+  },
+  "pattern": [
+    "GNG",
+    "DFD",
+    "IAI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magitinkerer:mana_durum_mender"
+  }
+}

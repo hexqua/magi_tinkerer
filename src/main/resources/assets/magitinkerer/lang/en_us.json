@@ -20,7 +20,7 @@
 
     "trait.magitinkerer.description.sea_friends": "While underwater, removes the mining speed penalties from being submerged and off the ground.",
     "trait.magitinkerer.description.soulhunter":  "Exposes souls on hit.\nEach Soulhunter level beyond I counts as one level of Spirit Plunder.",
-    "trait.magitinkerer.description.steadfast":  "High durability boosts Attack, Element, Range, and Defense.\nRepairable with dedicated equipment (not yet implemented).",
+    "trait.magitinkerer.description.steadfast":  "High durability boosts Attack, Element, Range, and Defense.\nRepairable with dedicated equipment.",
     "trait.magitinkerer.description.hollow":  "Boosts Handling, Continuity, Range, and Unique.\nReduces maximum durability based on the combined level of Hollow and Intensify.",
     "trait.magitinkerer.description.intensify":  "Boosts Attack and Element.\nReduces maximum durability based on the combined level of Hollow and Intensify.",
 
@@ -28,6 +28,8 @@
     "block.magitinkerer.maneuvering_coated_glass_pane": "Maneuvering-coated Glass Pane",
     "block.magitinkerer.restraint_coated_glass": "Restraint-coated Glass",
     "block.magitinkerer.restraint_coated_glass_pane": "Restraint-coated Glass Pane",
+
+    "block.magitinkerer.mana_durum_mender": "Mana-Durum Mender",
 
     "item.magitinkerer.light_blade": "%1$s Light Blade",
     "item.magitinkerer.heavy_blade": "%1$s Heavy Blade",
@@ -43,11 +45,33 @@
     "item.magitinkerer.conductor": "%1$s Conductor",
 
     "item.magitinkerer.durusium_ingot": "Durusium Ingot",
+    "item.magitinkerer.signum_thread": "Light-Thread of Signum",
+    "item.magitinkerer.spatial_distortion_mirror": "Pocket Mirror of Spatial Distortion",
+    "item.magitinkerer.dimension_distortion_mirror": "Pocket Mirror of Dimensional Distortion",
+
+    "item.magitinkerer.common.magic_item.cool_down": "On cooldown: %s",
+    "item.magitinkerer.signum_thread.desc_1": "Reproduces the effect of the %s Thread Page when used.",
+    "item.magitinkerer.signum_thread.desc_2": "Works only in certain dimensions.",
+    "item.magitinkerer.signum_thread.desc_3": "Draws mana from its bearer and stores it for use.",
+    "item.magitinkerer.spatial_distortion_mirror.desc_1": "Reproduces the effect of the %s Thread Page when used.",
+    "item.magitinkerer.spatial_distortion_mirror.desc_2": "Works only when the destination is in the same dimension.",
+    "item.magitinkerer.spatial_distortion_mirror.desc_3": "Recharges in a %s.",
+    "item.magitinkerer.dimension_distortion_mirror.desc_1": "Reproduces the effect of the %s Thread Page when used.",
+    "item.magitinkerer.dimension_distortion_mirror.desc_2": "Recharges in a %s.",
 
     "tooltip.block.magitinkerer.maneuvering_coated_glass": "What became of them after they lost their purity.",
     "tooltip.block.magitinkerer.maneuvering_coated_glass_pane": "The wall looks paper-thin from here. It is impossibly thick.",
     "tooltip.block.magitinkerer.restraint_coated_glass": "Held down by innocence itself, they resist in their own way.",
     "tooltip.block.magitinkerer.restraint_coated_glass_pane": "It seems to let everything through, yet it holds everything captive.",
+    "tooltip.block.magitinkerer.mana_durum_mender": "Still far from indestructible, with far too many prerequisites.",
+    "tooltip.hint.block.magitinkerer.mana_durum_mender": "Uses mana to mend tools made with Durusium.",
 
-    "tooltip.item.magitinkerer.durusium_ingot": "A dreaming scientist seeks a material that will never break."
+    "tooltip.item.magitinkerer.durusium_ingot": "A dreaming scientist seeks a material that will never break.",
+    "tooltip.item.magitinkerer.signum_thread": "What blasphemy, to recreate a goddess's miracle with engineering and magic.",
+    "tooltip.item.magitinkerer.spatial_distortion_mirror": "A portal this small ought to be usable like a spell.",
+    "tooltip.item.magitinkerer.dimension_distortion_mirror": "Across space and between dimensions, for the one I love.",
+
+    "message.magitinkerer.mana_durum_mender.unsupported": "Cannot mend %s!",
+    "message.magitinkerer.signum_thread.denied_dimension": "Cannot be used in this dimension!",
+    "message.magitinkerer.spatial_distortion_mirror.different_dimension": "Your respawn point is in another dimension."
 }

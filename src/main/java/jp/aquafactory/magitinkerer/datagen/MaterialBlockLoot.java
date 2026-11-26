@@ -1,5 +1,6 @@
 package jp.aquafactory.magitinkerer.datagen;
 
+import jp.aquafactory.magitinkerer.machine.MenderContent;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -23,6 +24,7 @@ final class MaterialBlockLoot extends BlockLootSubProvider {
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
         return List.of(MaterialContent.MANEUVERING_COATED_GLASS.get(), MaterialContent.MANEUVERING_COATED_GLASS_PANE.get(),
-                MaterialContent.RESTRAINT_COATED_GLASS.get(), MaterialContent.RESTRAINT_COATED_GLASS_PANE.get());
+                MaterialContent.RESTRAINT_COATED_GLASS.get(), MaterialContent.RESTRAINT_COATED_GLASS_PANE.get(),
+                MenderContent.MENDER.get());
     }
 }

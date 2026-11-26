@@ -1,0 +1,28 @@
+{
+  "type": "magitech:infusion",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "item": "magitinkerer:spatial_distortion_mirror"
+    }
+  },
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:lodestone"
+      }
+    },
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "magitech:hollow_crystal"
+      }
+    }
+  ],
+  "mana": 500000,
+  "result": {
+    "count": 1,
+    "id": "magitinkerer:dimension_distortion_mirror"
+  }
+}

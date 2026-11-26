@@ -1,6 +1,8 @@
 package jp.aquafactory.magitinkerer.datagen;
 
 import jp.aquafactory.magitinkerer.MagiTinkerer;
+import jp.aquafactory.magitinkerer.machine.MenderContent;
+import jp.aquafactory.magitinkerer.magicitem.TravelItemContent;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -19,6 +21,11 @@ final class MaterialModelProvider extends BlockStateProvider {
         glass(MaterialContent.MANEUVERING_COATED_GLASS.get(), MaterialContent.MANEUVERING_COATED_GLASS_PANE.get());
         glass(MaterialContent.RESTRAINT_COATED_GLASS.get(), MaterialContent.RESTRAINT_COATED_GLASS_PANE.get());
         itemModels().basicItem(MaterialContent.DURUSIUM_INGOT.get());
+        itemModels().basicItem(TravelItemContent.SIGNUM_THREAD.get());
+        itemModels().basicItem(TravelItemContent.SPATIAL_MIRROR.get());
+        itemModels().basicItem(TravelItemContent.DIMENSIONAL_MIRROR.get());
+        simpleBlockWithItem(MenderContent.MENDER.get(),
+                models().getExistingFile(modLoc("block/mana_durum_mender")));
     }
 
     private void glass(Block block, IronBarsBlock pane) {

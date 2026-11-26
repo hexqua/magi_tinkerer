@@ -1,0 +1,28 @@
+{
+  "type": "magitech:infusion",
+  "base": {
+    "count": 4,
+    "ingredient": {
+      "item": "minecraft:string"
+    }
+  },
+  "ingredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "magitech:phantom_crystal"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "magitech:high_purity_fluorite"
+      }
+    }
+  ],
+  "mana": 40000,
+  "result": {
+    "count": 1,
+    "id": "magitinkerer:signum_thread"
+  }
+}
