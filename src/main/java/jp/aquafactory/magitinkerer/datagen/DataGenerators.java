@@ -1,6 +1,7 @@
 package jp.aquafactory.magitinkerer.datagen;
 
 import jp.aquafactory.magitinkerer.MagiTinkerer;
+import jp.aquafactory.magitinkerer.machine.MenderContent;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import net.minecraft.core.HolderLookup;
@@ -10,12 +11,14 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.common.conditions.ItemExistsCondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.stln.magitech.content.recipe.ToolMaterialRecipe;
@@ -35,6 +38,8 @@ public final class DataGenerators {
         var output = generator.getPackOutput();
         generator.addProvider(event.includeServer(), new MagiTinkererRecipes(output, event.getLookupProvider()));
         generator.addProvider(event.includeServer(), new MaterialTags(output, event.getLookupProvider(), event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new MachineBlockTags(output, event.getLookupProvider(),
+                event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(),
                 List.of(new LootTableProvider.SubProviderEntry(MaterialBlockLoot::new, LootContextParamSets.BLOCK)),
                 event.getLookupProvider()));
@@ -42,6 +47,19 @@ public final class DataGenerators {
         generator.addProvider(event.includeClient(), new ToolMaterialSpriteSourceProvider(output, event.getLookupProvider(),
                 event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new MaterialModelProvider(output, event.getExistingFileHelper()));
+    }
+
+    private static final class MachineBlockTags extends BlockTagsProvider {
+        private MachineBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> registries,
+                                 ExistingFileHelper existingFiles) {
+            super(output, registries, MagiTinkerer.MOD_ID, existingFiles);
+        }
+
+        @Override
+        protected void addTags(@NotNull HolderLookup.Provider registries) {
+            tag(BlockTags.MINEABLE_WITH_AXE).add(MenderContent.MENDER.get());
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(MenderContent.MENDER.get());
+        }
     }
 
     private static final class MagiTinkererRecipes extends RecipeProvider {

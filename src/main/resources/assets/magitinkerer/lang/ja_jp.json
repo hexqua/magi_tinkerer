@@ -20,7 +20,7 @@
 
     "trait.magitinkerer.description.sea_friends":  "潜水中は水中と非接地による採掘速度の低下を受けない",
     "trait.magitinkerer.description.soulhunter":  "攻撃時、魂を露出させる\nレベル2以上は余剰分がSpirit Plunderとして機能",
-    "trait.magitinkerer.description.steadfast":  "高耐久で威力・属性・射程・防御を強化\n特定の機材で修理可能(未実装)",
+    "trait.magitinkerer.description.steadfast":  "高耐久で威力・属性・射程・防御を強化\n特定の機材で修理可能",
     "trait.magitinkerer.description.hollow":  "操作性、連続性、射程、特殊を強化\n空洞と集約の合計レベルに応じて最大耐久値が割合で減少",
     "trait.magitinkerer.description.intensify":  "威力、属性を強化\n空洞と集約の合計レベルに応じて最大耐久値が割合で減少",
 
@@ -51,6 +51,9 @@
     "tooltip.block.magitinkerer.restraint_coated_glass": "純粋無垢に抑圧された、彼らなりの抵抗。",
     "tooltip.block.magitinkerer.restraint_coated_glass_pane": "全てを通しそうに見えるが、全てを捕らえている。",
     "tooltip.block.magitinkerer.mana_durum_mender": "完全な不壊とは縁遠く、前提が多すぎる。",
+    "tooltip.hint.block.magitinkerer.mana_durum_mender": "マナを消費して、デュラシウムが使われている道具を修繕する。",
 
-    "tooltip.item.magitinkerer.durusium_ingot": "夢見がちな科学者は求む、永遠に壊れない物質こそを。"
+    "tooltip.item.magitinkerer.durusium_ingot": "夢見がちな科学者は求む、永遠に壊れない物質こそを。",
+
+    "message.magitinkerer.mana_durum_mender.unsupported": "%sは修繕できない！"
 }

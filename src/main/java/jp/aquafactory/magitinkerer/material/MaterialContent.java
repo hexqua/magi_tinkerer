@@ -1,6 +1,7 @@
 package jp.aquafactory.magitinkerer.material;
 
 import jp.aquafactory.magitinkerer.MagiTinkerer;
+import jp.aquafactory.magitinkerer.machine.MenderContent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -41,6 +42,7 @@ public final class MaterialContent {
                     output.accept(MANEUVERING_COATED_GLASS_PANE.get());
                     output.accept(RESTRAINT_COATED_GLASS.get());
                     output.accept(RESTRAINT_COATED_GLASS_PANE.get());
+                    output.accept(MenderContent.MENDER_ITEM.get());
                 })
                 .build());
     }

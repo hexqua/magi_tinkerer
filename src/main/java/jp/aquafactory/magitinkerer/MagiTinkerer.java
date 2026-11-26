@@ -5,6 +5,8 @@ import jp.aquafactory.magitinkerer.compat.bettercombat.network.CombatNetwork;
 import jp.aquafactory.magitinkerer.compat.malum.MalumSoulhunter;
 import jp.aquafactory.magitinkerer.compat.malum.network.SpellweavingNetwork;
 import jp.aquafactory.magitinkerer.datagen.DataGenerators;
+import jp.aquafactory.magitinkerer.machine.MenderContent;
+import jp.aquafactory.magitinkerer.machine.client.ManaDurumMenderRenderer;
 import jp.aquafactory.magitinkerer.material.MaterialContent;
 import jp.aquafactory.magitinkerer.material.ToolMaterials;
 import jp.aquafactory.magitinkerer.material.client.ConnectedGlassClientRegistration;
@@ -23,8 +25,10 @@ public final class MagiTinkerer {
     public MagiTinkerer(IEventBus modBus, Dist dist) {
         MaterialContent.register(modBus);
         ToolMaterials.register(modBus);
+        MenderContent.register(modBus);
         modBus.addListener(DataGenerators::gatherData);
         if (dist == Dist.CLIENT) {
+            modBus.addListener(ManaDurumMenderRenderer::register);
             modBus.addListener(ConnectedGlassClientRegistration::modifyModels);
             if (!ModList.get().isLoaded(MALUM_MOD_ID)) {
                 modBus.addListener(ToolMaterialCreativeTabs::hideSoulstainedSteel);
