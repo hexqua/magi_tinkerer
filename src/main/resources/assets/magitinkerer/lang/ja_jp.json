@@ -45,6 +45,19 @@
     "item.magitinkerer.conductor":  "%1$sのコンダクター",
 
     "item.magitinkerer.durusium_ingot": "デュラシウムインゴット",
+    "item.magitinkerer.signum_thread": "道しるべの光糸",
+    "item.magitinkerer.spatial_distortion_mirror": "空間歪曲の手鏡",
+    "item.magitinkerer.dimension_distortion_mirror": "次元歪曲の手鏡",
+
+    "item.magitinkerer.common.magic_item.cool_down": "クールダウン中: %s",
+    "item.magitinkerer.signum_thread.desc_1": "使用することで%sのスレッドページの機能を再現する",
+    "item.magitinkerer.signum_thread.desc_2": "機能に制限があり、特定のディメンションでしか使用できない",
+    "item.magitinkerer.signum_thread.desc_3": "所有者のマナを勝手に吸収する機能を持ち、発動分のマナを保持する",
+    "item.magitinkerer.spatial_distortion_mirror.desc_1": "使用することで%sのスレッドページの機能を再現する",
+    "item.magitinkerer.spatial_distortion_mirror.desc_2": "機能に制限があり、宛先が同一ディメンションでないと使用できない",
+    "item.magitinkerer.spatial_distortion_mirror.desc_3": "使用の際のマナは%sによるマナの供給が必要となる",
+    "item.magitinkerer.dimension_distortion_mirror.desc_1": "使用することで%sのスレッドページの機能を再現する",
+    "item.magitinkerer.dimension_distortion_mirror.desc_2": "使用の際のマナは%sによるマナの供給が必要となる",
 
     "tooltip.block.magitinkerer.maneuvering_coated_glass": "純粋さを失った、彼らの成れの果て。",
     "tooltip.block.magitinkerer.maneuvering_coated_glass_pane": "すぐそこにあるほどの薄い壁は、とてつもなく分厚い。",
@@ -54,6 +67,11 @@
     "tooltip.hint.block.magitinkerer.mana_durum_mender": "マナを消費して、デュラシウムが使われている道具を修繕する。",
 
     "tooltip.item.magitinkerer.durusium_ingot": "夢見がちな科学者は求む、永遠に壊れない物質こそを。",
+    "tooltip.item.magitinkerer.signum_thread": "女神の奇跡を工学と魔術で再現するという冒涜。",
+    "tooltip.item.magitinkerer.spatial_distortion_mirror": "ポータルの小型版であれば、魔術のように扱えるはず。",
+    "tooltip.item.magitinkerer.dimension_distortion_mirror": "空間だけでなく次元をも超える、愛しいあの人のために。",
 
-    "message.magitinkerer.mana_durum_mender.unsupported": "%sは修繕できない！"
+    "message.magitinkerer.mana_durum_mender.unsupported": "%sは修繕できない！",
+    "message.magitinkerer.signum_thread.denied_dimension": "このディメンションでは使用できない！",
+    "message.magitinkerer.spatial_distortion_mirror.different_dimension": "リスポーン地点と同じディメンションでないと使用できない！"
 }
