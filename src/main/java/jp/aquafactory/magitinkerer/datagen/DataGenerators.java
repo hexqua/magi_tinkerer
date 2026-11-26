@@ -70,6 +70,7 @@ public final class DataGenerators {
         @Override
         protected void buildRecipes(@NotNull RecipeOutput output) {
             VanillaRecipes.buildRecipes(output);
+            InfusionAltarRecipes.buildRecipes(output);
             ZardiusCrucibleRecipes.buildRecipes(output);
             buildMaterialRecipes(output);
         }

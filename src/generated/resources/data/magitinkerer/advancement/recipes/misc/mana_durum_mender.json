@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_durusium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "magitinkerer:durusium_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "magitinkerer:mana_durum_mender"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_durusium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "magitinkerer:mana_durum_mender"
+    ]
+  }
+}
