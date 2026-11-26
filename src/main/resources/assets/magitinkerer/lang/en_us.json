@@ -29,6 +29,8 @@
     "block.magitinkerer.restraint_coated_glass": "Restraint-coated Glass",
     "block.magitinkerer.restraint_coated_glass_pane": "Restraint-coated Glass Pane",
 
+    "block.magitinkerer.mana_durum_mender": "Mana-Durum Mender",
+
     "item.magitinkerer.light_blade": "%1$s Light Blade",
     "item.magitinkerer.heavy_blade": "%1$s Heavy Blade",
     "item.magitinkerer.light_handle": "%1$s Light Handle",
@@ -48,6 +50,7 @@
     "tooltip.block.magitinkerer.maneuvering_coated_glass_pane": "The wall looks paper-thin from here. It is impossibly thick.",
     "tooltip.block.magitinkerer.restraint_coated_glass": "Held down by innocence itself, they resist in their own way.",
     "tooltip.block.magitinkerer.restraint_coated_glass_pane": "It seems to let everything through, yet it holds everything captive.",
+    "tooltip.block.magitinkerer.mana_durum_mender": "(todo:翻訳)完全な不壊とは縁遠く、前提が多すぎる。",
 
     "tooltip.item.magitinkerer.durusium_ingot": "A dreaming scientist seeks a material that will never break."
 }

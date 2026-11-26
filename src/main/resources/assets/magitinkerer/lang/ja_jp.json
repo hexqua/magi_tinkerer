@@ -29,6 +29,8 @@
     "block.magitinkerer.restraint_coated_glass": "抑圧覆いのガラス",
     "block.magitinkerer.restraint_coated_glass_pane": "抑圧覆いのガラス板",
 
+    "block.magitinkerer.mana_durum_mender": "マナデュラム修繕装置",
+
     "item.magitinkerer.light_blade":  "%1$sの軽量刃",
     "item.magitinkerer.heavy_blade":  "%1$sの重量刃",
     "item.magitinkerer.light_handle":  "%1$sの軽量持ち手",
@@ -48,6 +50,7 @@
     "tooltip.block.magitinkerer.maneuvering_coated_glass_pane": "すぐそこにあるほどの薄い壁は、とてつもなく分厚い。",
     "tooltip.block.magitinkerer.restraint_coated_glass": "純粋無垢に抑圧された、彼らなりの抵抗。",
     "tooltip.block.magitinkerer.restraint_coated_glass_pane": "全てを通しそうに見えるが、全てを捕らえている。",
+    "tooltip.block.magitinkerer.mana_durum_mender": "完全な不壊とは縁遠く、前提が多すぎる。",
 
     "tooltip.item.magitinkerer.durusium_ingot": "夢見がちな科学者は求む、永遠に壊れない物質こそを。"
 }
